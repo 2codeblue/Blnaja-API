@@ -36,7 +36,7 @@ const sellerSignUp = async (req, res, next) => {
             id : sellerId,
             name : name, 
             email : email,
-            password : password, 
+            password : hashedPassword, 
             phone_number : phone_number,
             store_name : store_name
         }
