@@ -26,3 +26,30 @@ const customerSignUp = async (req, res, next) => {
     }
 }
 
+const sellerSignUp = async (req, res, next) => {
+    try {
+        const salt = await bcrypt.genSalt()
+        const {name, email, password, phone_number, store_name} = req.body
+        const sellerId = uuidv4()
+        const hashedPassword = await bcrypt.hash(password, salt)
+        const sellerData = {
+            id : sellerId,
+            name : name, 
+            email : email,
+            password : password, 
+            phone_number : phone_number,
+            store_name : store_name
+        }
+        const result = userQuery.sellerSignUp(sellerData)
+        commonHelper.response(res, result, 200, `New Seller with di : ${sellerId} is created`, null)
+    } catch (error) {
+        console.log()
+        const err = new createError.InternalServerError()
+        next(err)
+    }
+} 
+
+module.exports = {
+    customerSignUp,
+    sellerSignUp
+}
