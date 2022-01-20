@@ -13,35 +13,9 @@ const customerSignUp = (data) => {
     })
 }
 
-const sellerSignUp = (data) => {
-    return new Promise ((resolve, reject) => {
-        const sql = `INSERT INTO sellers SET ?`
-        connection.query(sql, data, (error, result) => {
-            if (!error) {
-                resolve(result)
-            } else {
-                reject(error)
-            }
-        })
-    })
-}
-
 const customerLogin = (data) => {
     return new Promise ((resolve, reject) => {
         const sql = `SELECT id, email, password FROM customers WHERE email = ?`
-        connection.query(sql, data.email, (error, result) => {
-            if (!error) {
-                resolve(result)
-            } else {
-                reject(error)
-            }
-        })
-    })
-}
-
-const sellerLogin = (data) => {
-    return new Promise ((resolve, reject) => {
-        const sql = `SELECT id, email, password FROM sellers WHERE email = ?`
         connection.query(sql, data.email, (error, result) => {
             if (!error) {
                 resolve(result)
@@ -68,11 +42,51 @@ const customerDetail = (customerId) => {
     })
 }
 
+const customerUpdate = (data, customerId) => {
+    return new Promise ((resolve, reject) => {
+        const sql = `UPDATE customers SET ? WHERE id = ?`
+        connection.query(sql, [data, customerId], (error, result) => {
+            if (!error) {
+                resolve(result)
+            } else {
+                reject(error)
+            }
+        })
+    })
+}
+
+//Seler Queries//
+const sellerSignUp = (data) => {
+    return new Promise ((resolve, reject) => {
+        const sql = `INSERT INTO sellers SET ?`
+        connection.query(sql, data, (error, result) => {
+            if (!error) {
+                resolve(result)
+            } else {
+                reject(error)
+            }
+        })
+    })
+}
+
+const sellerLogin = (data) => {
+    return new Promise ((resolve, reject) => {
+        const sql = `SELECT id, email, password FROM sellers WHERE email = ?`
+        connection.query(sql, data.email, (error, result) => {
+            if (!error) {
+                resolve(result)
+            } else {
+                reject(error)
+            }
+        })
+    })
+}
 
 module.exports = {
     customerSignUp,
     customerLogin,
     customerDetail,
+    customerUpdate,
     sellerSignUp,
-    sellerLogin
+    sellerLogin,
 }
