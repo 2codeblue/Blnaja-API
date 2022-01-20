@@ -10,6 +10,7 @@ const productRoutes = require('./src/routes/products')
 
 app.use(express.json())
 app.use(morgan)
+app.use(logger('combined'));
 app.use(cors())
 
 app.use('/users', userRoutes)
