@@ -20,6 +20,7 @@ CREATE TABLE sellers (
     email VARCHAR(50) NOT NULL,
     password VARCHAR(100) NOT NULL,
     phone_number VARCHAR(15) NOT NULL,
+    profile_picture TEXT NULL,
     store_name VARCHAR(50) NOT NULL,
     store_description TEXT NULL,
     created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -43,7 +44,9 @@ CREATE TABLE addresses (
 
 CREATE TABLE product_category (
     id VARCHAR(64) NOT NULL PRIMARY KEY,
-    name VARCHAR(50) NOT NULL
+    name VARCHAR(50) NOT NULL,
+    created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP NULL,
 );
 
 CREATE TABLE products (
@@ -53,12 +56,17 @@ CREATE TABLE products (
     name VARCHAR(50) NOT NULL,
     price INT(10) NOT NULL,
     condition VARCHAR(50) NOT NULL,
+    stock INT(100) NOT NULL,
     description TEXT NOT NULL,
     image1 TEXT NOT NULL,
     image2 TEXT NOT NULL,
     image3 TEXT NOT NULL,
     image4 TEXT NOT NULL,
     image5 TEXT NOT NULL,
+    created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP NULL,
+    FOREIGN KEY (category_id) REFERENCES product_category(id)
+    ON DELETE RESTRICT,
     FOREIGN KEY (seller_id) REFERENCES sellers(id)
     ON DELETE CASCADE
 );
