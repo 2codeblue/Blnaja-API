@@ -50,6 +50,18 @@ const customerLogin = async (req, res, next) => {
     }
 }
 
+const customerDetail = async (req, res, next) => {
+    try {
+        const customerId = req.params.id
+        const result = await userQuery.customerDetail
+        commonHelper.response(res, result, 200, `Customer ${customerId} detail:`, null)
+    } catch (error) {
+        console.log(err)
+        const err = new createError.InternalServerError()
+        next(err)
+    }
+}
+
 const customerUpdate = async (req, res, next) => {
     try {
         const {name, email, phone_number, gender, DOB, profile_picture} = req.body
@@ -120,11 +132,46 @@ const sellerLogin = async (req, res, next) => {
     }
 }
 
+const sellerDetail = async (req, res, next) => {
+    try {
+        const sellerId = req.params.id
+        const result = await userQuery.sellerDetail(sellerId)
+        commonHelper.response(res, result, 200, `Seller ${sellerId} details:`, null)
+    } catch (error) {
+        console.log(error)
+        const err = new createError.InternalServerError()
+        next(err)
+    }
+}
+
+const sellerUpdate = async (req, res, next) => {
+    try {
+        const sellerId = req.params.id
+        const {name, email, phone_number, profile_picture, store_name, store_description}
+        const sellerData = {
+            name : name,
+            email : email,
+            phone_number : phone_number,
+            profile_picture : profile_picture,
+            store_name : store_name,
+            store_description : store_description
+        }
+        const result = await userQuery.sellerUpdate(sellerData, sellerId)
+        commonHelper.response(res, result, 200, `Seller ${sellerId} is updated`, null)
+    } catch (error) {
+        console.log(error);
+        const err = new createError.InternalServerError()
+        next(err)
+    }
+}
 
 module.exports = {
     customerSignUp,
     customerLogin,
+    customerDetail,
     customerUpdate,
     sellerSignUp,
-    sellerLogin
+    sellerLogin,
+    sellerDetail,
+    sellerUpdate
 }

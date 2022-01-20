@@ -84,9 +84,28 @@ const sellerLogin = (data) => {
 
 const sellerDetail = (sellerId) => {
     return new Promise ((resolve, reject) => {
-        const sql = `SELECT id, name, email, phone_number, 
+        const sql = `SELECT id, name, email, phone_number, profile_picture, 
         store_name, store_description FROM sellers WHERE id = ?`
-        conn
+        connection.query(sql, sellerId, (error, result) => {
+            if (!error) {
+                resolve(result)
+            } else {
+                reject(error)
+            }
+        })
+    })
+}
+
+const sellerUpdate = (data, sellerId) => {
+    return new Promise ((resolve, reject) => {
+        const sql = `UPDATE sellers SET ? WHERE id = ?`
+        connection.query(sql, [data, sellerId], (error, result) => {
+            if (!error) {
+                resolve(result)
+            } else {
+                reject(error)
+            }
+        })
     })
 }
 
@@ -97,4 +116,6 @@ module.exports = {
     customerUpdate,
     sellerSignUp,
     sellerLogin,
+    sellerDetail,
+    sellerUpdate
 }
