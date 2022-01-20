@@ -1,6 +1,5 @@
 const express = require('express')
 const morgan = require('morgan')
-const logger = require('morgan')
 const cors = require('cors')
 require('dotenv').config()
 const app = express()
@@ -10,8 +9,7 @@ const userRoutes = require('./src/routes/users.js')
 const productRoutes = require('./src/routes/products')
 
 app.use(express.json())
-app.use(morgan)
-app.use(logger('combined'));
+app.use(morgan('dev'))
 app.use(cors())
 
 app.use('/users', userRoutes)
@@ -23,7 +21,7 @@ app.use((err, req, res, next) => {
     const statusCode = err.status
     const message = err.message
     res.status(statusCode)
-    req.json({
+    res.json({
         status : statusCode,
         message : message
     })

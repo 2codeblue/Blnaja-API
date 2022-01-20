@@ -55,7 +55,7 @@ CREATE TABLE products (
     seller_id VARCHAR(64) NOT NULL,
     name VARCHAR(50) NOT NULL,
     price INT(10) NOT NULL,
-    condition VARCHAR(50) NOT NULL,
+    product_condition VARCHAR(50) NOT NULL,
     stock INT(100) NOT NULL,
     description TEXT NOT NULL,
     image1 TEXT NOT NULL,
