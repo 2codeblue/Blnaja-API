@@ -6,12 +6,14 @@ const app = express()
 const PORT = process.env.PORT || 4000
 const commonHelper = require('./src/helper/common')
 const userRoutes = require('./src/routes/users.js')
+const productRoutes = require('./src/routes/products')
 
 app.use(express.json())
 app.use(morgan)
 app.use(cors())
 
 app.use('/users', userRoutes)
+app.use('/products', productRoutes)
 
 app.use(commonHelper.handleURLNotFound)
 
