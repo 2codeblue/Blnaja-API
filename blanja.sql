@@ -62,3 +62,13 @@ CREATE TABLE products (
     FOREIGN KEY (seller_id) REFERENCES sellers(id)
     ON DELETE CASCADE
 );
+
+CREATE TABLE payment_methods (
+    id VARCHAR(64) NOT NULL PRIMARY KEY,
+    name VARCHAR(50) NOT NULL,
+    logo TEXT NOT NULL
+);
+
+CREATE TABLE orders (
+    id VARCHAR(64) NOT NULL PRIMARY KEY,
+);

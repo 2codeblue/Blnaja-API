@@ -82,6 +82,14 @@ const sellerLogin = (data) => {
     })
 }
 
+const sellerDetail = (sellerId) => {
+    return new Promise ((resolve, reject) => {
+        const sql = `SELECT id, name, email, phone_number, 
+        store_name, store_description FROM sellers WHERE id = ?`
+        conn
+    })
+}
+
 module.exports = {
     customerSignUp,
     customerLogin,
