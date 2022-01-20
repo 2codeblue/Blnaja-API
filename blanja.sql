@@ -46,7 +46,7 @@ CREATE TABLE product_category (
     id VARCHAR(64) NOT NULL PRIMARY KEY,
     name VARCHAR(50) NOT NULL,
     created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    updated_at TIMESTAMP NULL,
+    updated_at TIMESTAMP NULL
 );
 
 CREATE TABLE products (
@@ -76,7 +76,7 @@ CREATE TABLE payment_methods (
     name VARCHAR(50) NOT NULL,
     logo TEXT NOT NULL,
     created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    updated_at TIMESTAMP NULL,
+    updated_at TIMESTAMP NULL
 );
 
 CREATE TABLE orders (
