@@ -147,7 +147,7 @@ const sellerDetail = async (req, res, next) => {
 const sellerUpdate = async (req, res, next) => {
     try {
         const sellerId = req.params.id
-        const {name, email, phone_number, profile_picture, store_name, store_description}
+        const {name, email, phone_number, profile_picture, store_name, store_description} = req.body
         const sellerData = {
             name : name,
             email : email,
