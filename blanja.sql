@@ -7,6 +7,9 @@ CREATE TABLE customers (
     email VARCHAR(50) NOT NULL,
     password VARCHAR(100) NOT NULL,
     phone_number VARCHAR(15) NOT NULL,
+    gender ENUM('male', 'female') NULL,
+    DOB DATE NULL,
+    profile_picture TEXT NULL,
     created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP NULL
 );
@@ -18,6 +21,7 @@ CREATE TABLE sellers (
     password VARCHAR(100) NOT NULL,
     phone_number VARCHAR(15) NOT NULL,
     store_name VARCHAR(50) NOT NULL,
+    store_description TEXT NULL,
     created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP NULL
 );
