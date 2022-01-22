@@ -2,7 +2,7 @@ const connection = require('./../config/dbConfig')
 
 const getProducts = () => {
     return new Promise ((resolve, reject) => {
-        const sql = `SELECT products.name, products.price, sellers.name FROM products INNER JOIN 
+        const sql = `SELECT products.name, products.price, products.image1, sellers.store_name FROM products INNER JOIN 
         sellers ON products.seller_id = sellers.id`
         connection.query(sql, (error, result) => {
             if (!error) {
