@@ -40,12 +40,12 @@ const getProductCategory = async (req, res, next) => {
 
 const addProduct = async (req, res, next) => {
     try {
-        const {category_id, seller_id, name, price, condition, stock, description,
+        const {category_id, seller_id, name, price, product_condition, stock, description,
                 image1, image2, image3, image4, image5} = req.body
         const productId = uuidv4()
         const productData = {
             id : productId, category_id : category_id, seller_id : seller_id, name : name, 
-            price : price, condition : condition, stock : stock, description : description,
+            price : price, product_condition : product_condition, stock : stock, description : description,
             image1 : image1, image2 : image2, image3 : image3, image4 : image4, image5 : image5
         }
         const result = await productQuery.addProduct(productData)
@@ -77,11 +77,11 @@ const addProductCategory = async (req, res, next) => {
 const updateProduct = async (req, res, next) => {
     try {
         const productId = req.params.id
-        const {category_id, seller_id, name, price, condition, stock, description,
+        const {category_id, seller_id, name, price, product_condition, stock, description,
             image1, image2, image3, image4, image5} = req.body
         const productData = {
             category_id : category_id, seller_id : seller_id, name : name, 
-            price : price, condition : condition, stock : stock, description : description,
+            price : price, product_condition : product_condition, stock : stock, description : description,
             image1 : image1, image2 : image2, image3 : image3, image4 : image4, image5 : image5
         }
         const result = await productQuery.updateProduct(productData, productId)
