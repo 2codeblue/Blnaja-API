@@ -8,5 +8,6 @@ route.get('/:id', productController.getProductDetail)
 route.get('/category', productController.getProductCategory)
 route.post('/', validator.productFormValidation, productController.addProduct)
 route.put('/:id', validator.productFormValidation, productController.updateProduct)
+route.delete('/:id')
 
 module.exports = route
