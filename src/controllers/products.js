@@ -34,7 +34,7 @@ const getProductCategory = async (req, res, next) => {
     } catch (error) {
         console.log(error)
         const err = new createError.InternalServerError()
-        next(err)
+        next(error)
     }
 }
 
