@@ -30,11 +30,11 @@ const getProductDetail = async (req, res, next) => {
 const getProductCategory = async (req, res, next) => {
     try {
         const result = await productQuery.getProductCategory()
-        commonHelper.response(res, result, 200, `Product caregories: `, null)
+        commonHelper.response(res, result, 200, `List all product categories: `, null)
     } catch (error) {
         console.log(error)
         const err = new createError.InternalServerError()
-        next(error)
+        next(err)
     }
 }
 

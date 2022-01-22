@@ -33,7 +33,7 @@ const getProductDetail = (productId) => {
 
 const getProductCategory = () => {
     return new Promise ((resolve, reject) => {
-        const sql = `SELECT id, name FROM product_category`
+        const sql = `SELECT * FROM product_category`
         connection.query(sql, (error, result) => {
             if (!error) {
                 resolve(result)
