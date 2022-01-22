@@ -93,14 +93,14 @@ const sellerUpdateValidation = (req, res, next) => {
 }
 
 const productFormValidation = (req, res, next) => {
-    const {category_id, seller_id, name, price, condition, stock, description,
+    const {category_id, seller_id, name, price, product_condition, stock, description,
         image1, image2, image3, image4, image5} = req.body
     const validationData = joi.object({
         category_id : joi.string().required(),
         seller_id : joi.string().required(),
         name : joi.string().min(5).max(30).required(),
         price : joi.number().required(),
-        condition : joi.string().required(),
+        product_condition : joi.string().required(),
         stock : joi.number().required(),
         description : joi.string().required(),
         image1 : joi.string().required(),
@@ -111,7 +111,7 @@ const productFormValidation = (req, res, next) => {
     })
     const {error} = validationData.validate({
         category_id : category_id, seller_id : seller_id, name : name, 
-        price : price, condition : condition, stock : stock, description : description,
+        price : price, product_condition : product_condition, stock : stock, description : description,
         image1 : image1, image2 : image2, image3 : image3, image4 : image4, image5 : image5
     })
     if (error) {
