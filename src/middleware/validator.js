@@ -122,10 +122,27 @@ const productFormValidation = (req, res, next) => {
     }
 }
 
+const productCategoryForm = (req, res, next) => {
+    const {name} = req.body
+    const validationData = joi.object({
+        name : joi.string().min(5).max(30).required()
+    })
+    const {error} = validationData.validate({
+        name : name
+    })
+    if (error) {
+        const errorMessage = error.details[0].message
+        return next(createError(422, errorMessage))
+    } else {
+        next()
+    }
+}
+
 module.exports = {
     customerSignUpValidation,
     customerUpdateValidation,
     sellerSignUpValidation,
     sellerUpdateValidation,
-    productFormValidation
+    productFormValidation,
+    productCategoryForm
 }

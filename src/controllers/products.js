@@ -57,6 +57,23 @@ const addProduct = async (req, res, next) => {
     }
 }
 
+const addProductCategory = async (req, res, next) => {
+    try {
+        const {name} = req.body
+        const categoryId = uuidv4()
+        const categoryData = {
+            id : categoryId,
+            name : name,
+        }
+        const result = await productQuery.addProductCategory(categoryData)
+        commonHelper.response(res, result, 200, `Product category : ${name} is added`, null)
+    } catch (error) {
+        console.log(error)
+        const err = new createError.InternalServerError()
+        next(err)
+    }
+}
+
 const updateProduct = async (req, res, next) => {
     try {
         const productId = req.params.id
@@ -81,5 +98,6 @@ module.exports = {
     getProductDetail,
     getProductCategory,
     addProduct,
+    addProductCategory,
     updateProduct,
 }
