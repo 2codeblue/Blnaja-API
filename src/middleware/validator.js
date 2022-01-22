@@ -27,7 +27,7 @@ const customerUpdateValidation = (req, res, next) => {
     const validationData = joi.object({
         name : joi.string().min(5).max(30).required(),
         email : joi.string().email().required(),
-        phone_number : joi.number().min(11).max(15).required(),
+        phone_number : joi.number().length(11).required(),
         gender : joi.string().required(),
         DOB : joi.date().required(),
         profile_picture : joi.string().required()
