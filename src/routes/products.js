@@ -5,7 +5,7 @@ const validator = require('../middleware/validator')
 
 route.get('/', productController.getProducts)
 route.get('/:id', productController.getProductDetail)
-route.get('/category', productController.getProductCategory)
+route.get('/category/', productController.getProductCategory)
 route.post('/', validator.productFormValidation, productController.addProduct)
 route.post('/category', validator.productCategoryForm, productController.addProductCategory)
 route.put('/:id', validator.productFormValidation, productController.updateProduct)
