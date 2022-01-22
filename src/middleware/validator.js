@@ -48,7 +48,7 @@ const sellerSignUpValidation = (req, res, next) => {
         name : joi.string().min(5).max(30).required(),
         email : joi.string().email().required(),
         password : joi.string().min(8).max(16).alphanum().required(),
-        phone_number : joi.number().min(11).max(15).required(),
+        phone_number : joi.number().length(11).required(),
         store_name : joi.string().min(5).max(30).required()
     })
     const {error} = validationData.validate({
@@ -71,7 +71,7 @@ const sellerUpdateValidation = (req, res, next) => {
     const validationData = joi.object({
         name : joi.string().min(5).max(30).required(),
         email : joi.string().email().required(),
-        phone_number : joi.number().min(11).max(15).required(),
+        phone_number : joi.number().length(11).required(),
         profile_picture : joi.string().required(),
         store_name : joi.string().min(5).max(30).required(),
         store_description : joi.string().required()
