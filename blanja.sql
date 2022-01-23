@@ -109,7 +109,7 @@ CREATE TABLE bag_item (
     customer_bags_id VARCHAR(64) NULL,
     product_id VARCHAR(64) NOT NULL,
     size VARCHAR(20) NOT NULL,
-    color VARCHAR(20) NOT NULL,
+    color VARCHAR(20) NULL,
     quantity INT(10) NOT NULL,
     status ENUM('Pending', 'Success'),
     FOREIGN KEY (customer_bags_id) REFERENCES customer_bags(id)
