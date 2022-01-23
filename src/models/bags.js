@@ -32,7 +32,5 @@ const getItems = (customer_bags_id) => {
 
 module.exports = {
     addItem,
-    getItems,
-    updateItem,
-    deleteItem
+    getItems
 }

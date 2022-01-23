@@ -36,7 +36,6 @@ const getItems = async (req, res, next) => {
 
 module.exports = {
     addItem,
-    getItems,
-    updateItem,
+    getItems
 
 }
