@@ -16,9 +16,9 @@ const getProducts = () => {
 
 const getProductDetail = (productId) => {
     return new Promise ((resolve, reject) => {
-        const sql = `SELECT products.id, products.name, products.price, products.price, 
+        const sql = `SELECT products.id, products.name, products.price, 
         products.product_condition, products.stock, products.description, products.image1, products.image2, products.image3, 
-        products.image4, products.image5, product_category.name, sellers.store_name FROM products 
+        products.image4, products.image5, product_category.name as category_name, sellers.store_name FROM products 
         INNER JOIN product_category ON products.category_id = product_category.id INNER JOIN sellers 
         ON products.seller_id = sellers.id WHERE products.id = ?`
         connection.query(sql, productId, (error, result) => {
