@@ -79,34 +79,48 @@ CREATE TABLE payment_methods (
     updated_at TIMESTAMP NULL
 );
 
-CREATE TABLE customer_bags (
-    id VARCHAR(64) NOT NULL PRIMARY KEY,
-    order_id VARCHAR(64) NULL,
-    customer_id VARCHAR(64) NOT NULL,
-    product_id VARCHAR(64) NOT NULL,
-    category_id VARCHAR(64) NOT NULL,
-    total_price INT(10) NOT NULL,
-    quantity INT(10) NOT NULL,
-    size VARCHAR(20) NOT NULL,
-    color VARCHAR(20) NOT NULL,
-    status ENUM(0, 1),
-    FOREIGN KEY (order_id) REFERENCES orders(id)
-    ON DELETE RESTRICT
-);
-
-
 CREATE TABLE orders (
     id VARCHAR(64) NOT NULL PRIMARY KEY,
+    customer_id VARCHAR(64) NOT NULL,
     address_id VARCHAR(64) NOT NULL,
     payment_method_id VARCHAR(64) NOT NULL,
-    status ENUM(0, 1),
+    status ENUM('Pending', 'Success'),
+    FOREIGN KEY (customer_id) REFERENCES customers(id)
+    ON DELETE RESTRICT,
     FOREIGN KEY (address_id) REFERENCES addresses(id)
     ON DELETE RESTRICT,
     FOREIGN KEY (payment_method_id) REFERENCES payment_methods(id)
     ON DELETE RESTRICT
 );
 
+CREATE TABLE customer_bags (
+    id VARCHAR(64) NOT NULL PRIMARY KEY,
+    order_id VARCHAR(64) NULL,
+    total_price INT(10) NOT NULL,
+    total_quantity INT(10) NOT NULL,
+    status ENUM('Pending', 'Success'),
+    FOREIGN KEY (order_id) REFERENCES orders(id)
+    ON DELETE RESTRICT
+);
+
+
+CREATE TABLE bag_item (
+    id VARCHAR(64) NOT NULL PRIMARY KEY,
+    customer_bags_id VARCHAR(64) NULL,
+    product_id VARCHAR(64) NOT NULL,
+    size VARCHAR(20) NOT NULL,
+    color VARCHAR(20) NOT NULL,
+    quantity INT(10) NOT NULL,
+    status ENUM('Pending', 'Success'),
+    FOREIGN KEY (customer_bags_id) REFERENCES customer_bags(id)
+    ON DELETE RESTRICT,
+    FOREIGN KEY (product_id) REFERENCES products(id)
+    ON DELETE RESTRICT
+);
+
+
 
 
 
 -- product id, category id, seller id, name, price, amount, size, color
+
