@@ -30,7 +30,9 @@ const getItems = async (req, res, next) => {
         const result = await bagsQuery.getItems(customer_bags_id)
         commonHelper.response(res, result, 200, `List items of bags : ${customer_bags_id}`)
     } catch (error) {
-        
+        console.log(error.message)
+        const err = new createError.InternalServerError()
+        next(err)
     }
 }
 
@@ -39,7 +41,9 @@ const getAlltems = async (req, res, next) => {
         const result = await bagsQuery.getItems()
         commonHelper.response(res, result, 200, `List items`)
     } catch (error) {
-        
+        console.log(error.message)
+        const err = new createError.InternalServerError()
+        next(err)
     }
 }
 
