@@ -18,7 +18,7 @@ const addItem = async (req, res, next) => {
         const result = await bagsQuery.addItem(itemData)
         commonHelper.response(res, result, 200, `Product ${product_id} is added to customer bags : ${customer_bags_id}`, null)
     } catch (error) {
-        console.log(error)
+        console.log(error.message)
         const err = new createError.InternalServerError()
         next(err)
     }
@@ -34,8 +34,17 @@ const getItems = async (req, res, next) => {
     }
 }
 
+const getAlltems = async (req, res, next) => {
+    try {
+        const result = await bagsQuery.getItems()
+        commonHelper.response(res, result, 200, `List items`)
+    } catch (error) {
+        
+    }
+}
+
 module.exports = {
     addItem,
-    getItems
-
+    getItems,
+    getAlltems
 }
