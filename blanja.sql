@@ -84,7 +84,7 @@ CREATE TABLE orders (
     customer_id VARCHAR(64) NOT NULL,
     address_id VARCHAR(64) NOT NULL,
     payment_method_id VARCHAR(64) NOT NULL,
-    status ENUM('Pending', 'Success'),
+    status ENUM('Pending', 'Success') NOT NULL DEFAULT 'Pending',
     FOREIGN KEY (customer_id) REFERENCES customers(id)
     ON DELETE RESTRICT,
     FOREIGN KEY (address_id) REFERENCES addresses(id)
@@ -96,9 +96,9 @@ CREATE TABLE orders (
 CREATE TABLE customer_bags (
     id VARCHAR(64) NOT NULL PRIMARY KEY,
     order_id VARCHAR(64) NULL,
-    total_price INT(10) NOT NULL,
-    total_quantity INT(10) NOT NULL,
-    status ENUM('Pending', 'Success'),
+    total_price INT(10) NOT NULL DEFAULT 0,
+    total_quantity INT(10) NOT NULL DEFAULT 0,
+    status ENUM('Pending', 'Success') NOT NULL DEFAULT 'Pending',
     FOREIGN KEY (order_id) REFERENCES orders(id)
     ON DELETE RESTRICT
 );
@@ -111,7 +111,7 @@ CREATE TABLE bag_item (
     size VARCHAR(20) NOT NULL,
     color VARCHAR(20) NULL,
     quantity INT(10) NOT NULL,
-    status ENUM('Pending', 'Success'),
+    status ENUM('Pending', 'Success') NOT NULL DEFAULT 'Pending',
     FOREIGN KEY (customer_bags_id) REFERENCES customer_bags(id)
     ON DELETE RESTRICT,
     FOREIGN KEY (product_id) REFERENCES products(id)
