@@ -5,7 +5,7 @@ const bagsQuery = require('../models/bags')
 
 const addItem = async (req, res, next) => {
     try {
-        const { product_id, customer_bags_id, size, qty, color } = req.body
+        const { product_id, customer_bags_id, size, color, qty } = req.body
         const bag_item_id = uuidv4()
         const itemData = {
             id : bag_item_id,
