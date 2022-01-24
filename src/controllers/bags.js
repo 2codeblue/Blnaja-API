@@ -7,6 +7,9 @@ const addItem = async (req, res, next) => {
     try {
         const { product_id, customer_bags_id, size, color, qty } = req.body
         const bag_item_id = uuidv4()
+        const bagData = {
+            id : customer_bags_id
+        }
         const itemData = {
             id : bag_item_id,
             customer_bags_id : customer_bags_id,
@@ -15,10 +18,16 @@ const addItem = async (req, res, next) => {
             color : color,
             quantity : qty
         }
-        const result = await bagsQuery.addItem(itemData)
+        console.log(itemData)
+        const addIdToBag = await bagsQuery.addItemsToBags(bagData)
+        const addItemToBag = await bagsQuery.addItem(itemData)
+        const result = {
+            addIdToBag,
+            addItemToBag
+        }
         commonHelper.response(res, result, 200, `Product ${product_id} is added to customer bags : ${customer_bags_id}`, null)
     } catch (error) {
-        console.log(error.message)
+        console.log(error)
         const err = new createError.InternalServerError()
         next(err)
     }
@@ -36,19 +45,8 @@ const getItems = async (req, res, next) => {
     }
 }
 
-const getAlltems = async (req, res, next) => {
-    try {
-        const result = await bagsQuery.getItems()
-        commonHelper.response(res, result, 200, `List items`)
-    } catch (error) {
-        console.log(error.message)
-        const err = new createError.InternalServerError()
-        next(err)
-    }
-}
 
 module.exports = {
     addItem,
-    getItems,
-    getAlltems
+    getItems
 }
