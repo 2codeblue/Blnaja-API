@@ -53,7 +53,7 @@ const customerLogin = async (req, res, next) => {
 const customerDetail = async (req, res, next) => {
     try {
         const customerId = req.params.id
-        const result = await userQuery.customerDetail()
+        const result = await userQuery.customerDetail(customerId)
         commonHelper.response(res, result, 200, `Customer ${customerId} detail:`, null)
     } catch (error) {
         console.log(err)
