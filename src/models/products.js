@@ -57,6 +57,19 @@ const addProduct = (data) => {
     })
 }
 
+const getDetailProductCategory = (categoryId) => {
+    return new Promise ((resolve, reject) => {
+        const sql = `SELECT * FROM product_category WHERE id = ?`
+        connection.query(sql, categoryId, (error, result) => {
+            if (!error) {
+                resolve(result)
+            } else {
+                reject(error)
+            }
+        })
+    })
+}
+
 const addProductCategory = (data) => {
     return new Promise ((resolve, reject) => {
         const sql = `INSERT INTO product_category SET ?`
@@ -88,6 +101,7 @@ module.exports = {
     getProductDetail,
     getProductCategory,
     addProduct,
+    getDetailProductCategory,
     addProductCategory,
     updateProduct,
 }
