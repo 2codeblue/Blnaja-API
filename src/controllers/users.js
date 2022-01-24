@@ -56,7 +56,7 @@ const customerDetail = async (req, res, next) => {
         const result = await userQuery.customerDetail(customerId)
         commonHelper.response(res, result, 200, `Customer ${customerId} detail:`, null)
     } catch (error) {
-        console.log(err)
+        console.log(error)
         const err = new createError.InternalServerError()
         next(err)
     }

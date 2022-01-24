@@ -28,10 +28,11 @@ const customerLogin = (data) => {
 
 const customerDetail = (customerId) => {
     return new Promise ((resolve, reject) => {
-        const sql = `SELECT customers.id, customers.name, customers.email, 
-        customers.phone_number, addresses.id, addresses.recipient_name, addresses.address, 
-        addresses.city, addresses.post_code FROM customers INNER JOIN addresses ON 
-        customers.id = addresses.customer_id WHERE customers.id = ?`
+        // const sql = `SELECT customers.id, customers.name, customers.email, 
+        // customers.phone_number, addresses.id, addresses.recipient_name, addresses.address, 
+        // addresses.city, addresses.postal_code FROM customers INNER JOIN addresses ON 
+        // customers.id = addresses.customer_id WHERE customers.id = ?`
+        const sql = `SELECT * FROM customers WHERE id = ?`
         connection.query(sql, customerId, (error, result) => {
             if (!error) {
                 resolve(result)
