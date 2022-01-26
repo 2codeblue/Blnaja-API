@@ -29,8 +29,8 @@ const customerUpdateValidation = (req, res, next) => {
         email : joi.string().email().required(),
         phone_number : joi.number().required(),
         gender : joi.string().required(),
-        DOB : joi.date().required(),
-        profile_picture : joi.string().required()
+        DOB : joi.date(),
+        profile_picture : joi.string()
     })
     const {error} = validationData.validate({
         name : name, email : email, phone_number : phone_number, gender : gender,
