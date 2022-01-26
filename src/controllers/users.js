@@ -73,7 +73,7 @@ const customerUpdate = async (req, res, next) => {
             gender : gender,
             DOB : DOB,
             profile_picture : profile_picture,
-            updated_at : new Date().toString()
+            updated_at : new Date()
         }
         const result = await userQuery.customerUpdate(customerData, customerId)
         commonHelper.response(res, result, 200, `Customer with id : ${customerId} is updated`)
