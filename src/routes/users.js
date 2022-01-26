@@ -6,7 +6,7 @@ const validator = require('../middleware/validator')
 route.get('/customer/:id', userController.customerDetail)
 route.post('/customer/signup', validator.customerSignUpValidation, userController.customerSignUp)
 route.post('/customer/login', userController.customerLogin)
-route.put('/customer/:id', validator.customerUpdateValidation ,userController.customerUpdate)
+route.put('/customer/:id', userController.customerUpdate)
 
 route.get('/seller/:id', userController.sellerDetail)
 route.post('/seller/signup', validator.sellerSignUpValidation, userController.sellerSignUp)
