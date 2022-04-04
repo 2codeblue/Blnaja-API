@@ -21,8 +21,7 @@ const customerSignUp = async (req, res, next) => {
         commonHelper.response(res, result, 200, `New Customer with id : ${customerId} is created`, null)
     } catch (error) {
         console.log(error)
-        const err = new createError.InternalServerError()
-        next(err)
+        next({ status: 500, message: `${error.message}`})
     }
 }
 
