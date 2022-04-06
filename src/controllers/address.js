@@ -117,7 +117,7 @@ const deleteAddress = async (req, res, next) => {
         const {address_id} = req.body
         const result = await addressQuery.deleteAddress(address_id)
         if (result.affectedRows > 0) {
-            commonHelper.response(res, newPrimary, 200, `Address ${address_id} is deleted`)
+            commonHelper.response(res, result, 200, `Address ${address_id} is deleted`)
         }
     } catch (error) {
         next({ status: 500, message: `${error.message}`})
