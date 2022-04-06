@@ -40,10 +40,10 @@ const updateAddress = (data, address_id) => {
     })
 }
 
-const getCurrentPrimaryAddress = (customer_id) => {
+const getCurrentPrimaryAddress = (customer_id, value) => {
     return new Promise ((resolve, reject) => {
-        const sql = `SELECT id FROM addresses WHERE customer_id = ? AND address_primary = 1`
-        connection.query(sql, customer_id, (error, result) => {
+        const sql = `SELECT id FROM addresses WHERE customer_id = ? AND address_primary = ?`
+        connection.query(sql, [customer_id, value], (error, result) => {
             if (!error) {
                 resolve(result)
             } else {

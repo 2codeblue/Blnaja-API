@@ -14,7 +14,7 @@ const addOrder = async (req, res, next) => {
             total_quantity : total_quantity,
             status : `Success`
         }
-        const [primaryAddress] = await addressQuery.getCurrentPrimaryAddress(customer_id)
+        const [primaryAddress] = await addressQuery.getCurrentPrimaryAddress(customer_id, 1)
         console.log(primaryAddress)
         const addOrderData = {
             id : order_id,

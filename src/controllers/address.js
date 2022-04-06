@@ -25,7 +25,7 @@ const addAddress = async (req, res, next) => {
             city : city
         }
         if (address_primary) {
-            const [currentPrimary] = await addressQuery.getCurrentPrimaryAddress(customer_id)
+            const [currentPrimary] = await addressQuery.getCurrentPrimaryAddress(customer_id, 1)
             await addressQuery.changePrimaryAddress(0, currentPrimary.id)
             data = {...data, address_primary : 1}
             const newAddress = await addressQuery.addAddress(data)
@@ -86,10 +86,12 @@ const updateAddress = async (req, res, next) => {
 
 const getPrimaryAddress = async (req, res, next) => {
     try {
-        const {customer_id} = req.params.id
-        const result = await addressQuery.getCurrentPrimaryAddress(customer_id)
+        const customer_id = req.params.id
+        const [result] = await addressQuery.getCurrentPrimaryAddress(customer_id, 1)
+        console.log(result)
         commonHelper.response(res, result, 200, `Customer ${customer_id}'s current primary address`)
     } catch (error) {
+        console.log(error)
         next({ status: 500, message: `${error.message}`})
     }
 }
@@ -97,7 +99,7 @@ const getPrimaryAddress = async (req, res, next) => {
 const changePrimaryAddress = async (req, res, next) => {
     try {
         const {new_primary_address_id, customer_id} = req.body
-        const [currentPrimary] = await addressQuery.getCurrentPrimaryAddress(customer_id)
+        const [currentPrimary] = await addressQuery.getCurrentPrimaryAddress(customer_id, 1)
         const changePrimaryAddress = await addressQuery.changePrimaryAddress(0, currentPrimary.id)
         if (changePrimaryAddress.affectedRows > 0) {
             const newPrimary = await addressQuery.changePrimaryAddress(1, new_primary_address_id)
