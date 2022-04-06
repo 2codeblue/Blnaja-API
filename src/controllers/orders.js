@@ -25,8 +25,7 @@ const addOrder = async (req, res, next) => {
         commonHelper.response(res, result, 200, `Customer Bag ${customer_bags_id} is updated and new order ${order_id} is created`, null)
     } catch (error) {
         console.log(error)
-        const err = new createError.InternalServerError()
-        next(err)
+        next({ status: 500, message: `${error.message}`})
     }
 }
 
@@ -37,8 +36,7 @@ const getOrdersByCustomerId = async (req, res, next) => {
         commonHelper.response(res, result, 200, `Order ${result[0].id} of customer ${customer_id}`, null)
     } catch (error) {
         console.log(error)
-        const err = new createError.InternalServerError()
-        next(err)
+        next({ status: 500, message: `${error.message}`})
     }
 }
 
