@@ -57,8 +57,7 @@ const addItem = async (req, res, next) => {
         }
     } catch (error) {
         console.log(error)
-        const err = new createError.InternalServerError()
-        next(err)
+        next({ status: 500, message: `${error.message}`})
     }
 }
 
@@ -69,8 +68,7 @@ const getItems = async (req, res, next) => {
         commonHelper.response(res, result, 200, `List items of bags : ${customer_bags_id}`)
     } catch (error) {
         console.log(error.message)
-        const err = new createError.InternalServerError()
-        next(err)
+        next({ status: 500, message: `${error.message}`})
     }
 }
 

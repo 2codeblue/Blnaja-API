@@ -44,8 +44,7 @@ const customerLogin = async (req, res, next) => {
             commonHelper.response(res, null, 404, `Your username is not found`, null)
         }
     } catch (error) {
-        const err = new createError.InternalServerError()
-        next(err)
+        next({ status: 500, message: `${error.message}`})
     }
 }
 
@@ -56,8 +55,7 @@ const customerDetail = async (req, res, next) => {
         commonHelper.response(res, result, 200, `Customer ${customerId} detail:`, null)
     } catch (error) {
         console.log(error)
-        const err = new createError.InternalServerError()
-        next(err)
+        next({ status: 500, message: `${error.message}`})
     }
 }
 
@@ -78,8 +76,7 @@ const customerUpdate = async (req, res, next) => {
         commonHelper.response(res, result, 200, `Customer with id : ${customerId} is updated`)
     } catch (error) {
         console.log(error)
-        const err = new createError.InternalServerError()
-        next(err)
+        next({ status: 500, message: `${error.message}`})
     }
 }
 
@@ -101,8 +98,7 @@ const sellerSignUp = async (req, res, next) => {
         commonHelper.response(res, result, 200, `New Seller with di : ${sellerId} is created`, null)
     } catch (error) {
         console.log(error)
-        const err = new createError.InternalServerError()
-        next(err)
+        next({ status: 500, message: `${error.message}`})
     }
 }
 
@@ -126,8 +122,7 @@ const sellerLogin = async (req, res, next) => {
         }
     } catch (error) {
         console.log(error)
-        const err = new createError.InternalServerError()
-        next(err)
+        next({ status: 500, message: `${error.message}`})
     }
 }
 
@@ -159,8 +154,7 @@ const sellerUpdate = async (req, res, next) => {
         commonHelper.response(res, result, 200, `Seller ${sellerId} is updated`, null)
     } catch (error) {
         console.log(error);
-        const err = new createError.InternalServerError()
-        next(err)
+        next({ status: 500, message: `${error.message}`})
     }
 }
 

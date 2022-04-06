@@ -10,8 +10,7 @@ const getProducts = async (req, res, next) => {
         commonHelper.response(res, result, 200, `List all products: `, null)
     } catch (error) {
         console.log(error)
-        const err = new createError.InternalServerError()
-        next(err)
+        next({ status: 500, message: `${error.message}`})
     }
 }
 
@@ -22,8 +21,7 @@ const getProductDetail = async (req, res, next) => {
         commonHelper.response(res, result, 200, `Product ${productId} detail: `, null)
     } catch (error) {
         console.log(error)
-        const err = new createError.InternalServerError()
-        next(err)
+        next({ status: 500, message: `${error.message}`})
     }
 }
 
@@ -33,8 +31,7 @@ const getProductCategory = async (req, res, next) => {
         commonHelper.response(res, result, 200, `List all product categories: `, null)
     } catch (error) {
         console.log(error)
-        const err = new createError.InternalServerError()
-        next(err)
+        next({ status: 500, message: `${error.message}`})
     }
 }
 
@@ -52,8 +49,7 @@ const addProduct = async (req, res, next) => {
         commonHelper.response(res, result, 200, `Adding product ${productId} to ${seller_id}`, null)
     } catch (error) {
         console.log(error)
-        const err = new createError.InternalServerError()
-        next(err)
+        next({ status: 500, message: `${error.message}`})
     }
 }
 
@@ -64,8 +60,7 @@ const getDetailProductCategory = async (req, res, next) => {
         commonHelper.response(res, result, 200, `Detail ${categoryId}`, null)
     } catch (error) {
         console.log(error)
-        const err = new createError.InternalServerError()
-        next(err)
+        next({ status: 500, message: `${error.message}`})
     }
 }
 
@@ -81,8 +76,7 @@ const addProductCategory = async (req, res, next) => {
         commonHelper.response(res, result, 200, `Product category : ${name} is added`, null)
     } catch (error) {
         console.log(error)
-        const err = new createError.InternalServerError()
-        next(err)
+        next({ status: 500, message: `${error.message}`})
     }
 }
 
@@ -100,8 +94,7 @@ const updateProduct = async (req, res, next) => {
         commonHelper.response(res, result, `Product ${productId} is updated`, null)
     } catch (error) {
         console.log(error)
-        const err = new createError.InternalServerError()
-        next(err)
+        next({ status: 500, message: `${error.message}`})
     }
 }
 

@@ -2,22 +2,29 @@ const { v4 : uuidv4 } = require('uuid')
 const createError = require('http-errors')
 const commonHelper = require('../helper/common')
 const ordersQuery = require('../models/orders')
+const addressQuery = require('../models/address')
 
 const addOrder = async (req, res, next) => {
     try {
-        const {customer_bags_id, total_price, total_quantity, customer_id} = req.body
+        const {customer_bags_id, total_price, total_quantity, customer_id, payment_method_id} = req.body
         const order_id = uuidv4()
         const updateCustomerBagData = {
+            order_id : order_id,
             total_price : total_price,
             total_quantity : total_quantity,
             status : `Success`
         }
+        const [primaryAddress] = await addressQuery.getCurrentPrimaryAddress(customer_id)
+        console.log(primaryAddress)
         const addOrderData = {
             id : order_id,
-            customer_id : customer_id
+            customer_id : customer_id,
+            address_id  : primaryAddress.id,
+            payment_method_id : payment_method_id,
+            status : 'Success'
         }
-        const updateCustomerBag = await ordersQuery.updateCustomerBag(updateCustomerBagData, customer_bags_id)
         const addOrder = await ordersQuery.addOrder(addOrderData)
+        const updateCustomerBag = await ordersQuery.updateCustomerBag(updateCustomerBagData, customer_bags_id)
         const result = {
             updateCustomerBag,
             addOrder
@@ -31,8 +38,9 @@ const addOrder = async (req, res, next) => {
 
 const getOrdersByCustomerId = async (req, res, next) => {
     try {
-        const {customer_id} = req.params.id
+        const customer_id = req.params.id
         const result = await ordersQuery.getOrdersByCustomerId(customer_id)
+        console.log(result)
         commonHelper.response(res, result, 200, `Order ${result[0].id} of customer ${customer_id}`, null)
     } catch (error) {
         console.log(error)
