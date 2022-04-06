@@ -24,16 +24,25 @@ const addAddress = async (req, res, next) => {
             postal_code : postal_code,
             city : city
         }
-        if (address_primary) {
-            const [currentPrimary] = await addressQuery.getCurrentPrimaryAddress(customer_id, 1)
-            await addressQuery.changePrimaryAddress(0, currentPrimary.id)
-            data = {...data, address_primary : 1}
-            const newAddress = await addressQuery.addAddress(data)
-            if (newAddress.affectedRows > 0) {
-                commonHelper.response(res, newAddress, 200, `New address ${address_type}`)
+        const checkCurrentPrimary = await addressQuery.getCurrentPrimaryAddress(customer_id, 1)
+        if (checkCurrentPrimary.length === 1) {
+            if (address_primary) {
+                const [currentPrimary] = await addressQuery.getCurrentPrimaryAddress(customer_id, 1)
+                await addressQuery.changePrimaryAddress(0, currentPrimary.id)
+                data = {...data, address_primary : 1}
+                const newAddress = await addressQuery.addAddress(data)
+                if (newAddress.affectedRows > 0) {
+                    commonHelper.response(res, newAddress, 200, `New address ${address_type}`)
+                }
+            } else {
+                data = {...data, address_primary : 0}
+                const newAddress = await addressQuery.addAddress(data)
+                if (newAddress.affectedRows > 0) {
+                    commonHelper.response(res, newAddress, 200, `New address ${address_type}`)
+                }
             }
         } else {
-            data = {...data, address_primary : 0}
+            data = {...data, address_primary : 1}
             const newAddress = await addressQuery.addAddress(data)
             if (newAddress.affectedRows > 0) {
                 commonHelper.response(res, newAddress, 200, `New address ${address_type}`)
