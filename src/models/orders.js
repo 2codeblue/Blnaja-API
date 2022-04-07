@@ -56,7 +56,7 @@ const getOrdersByCustomerId = (customer_id) => {
     return new Promise ((resolve, reject) => {
         const sql = `SELECT orders.id, orders.status, customer_bags.total_price, customer_bags.total_quantity, 
         bag_item.product_id FROM customer_bags INNER JOIN orders ON customer_bags.order_id = orders.id INNER JOIN 
-        bag_item ON customer_bags.id = bag_item.customer_bags_id WHERE orders.customer_id = ? GROUP BY orders.id`
+        bag_item ON customer_bags.id = bag_item.customer_bags_id WHERE orders.customer_id = ? GROUP BY customer_bags.order_id`
         connection.query(sql, customer_id, (error, result) => {
             if (!error) {
                 resolve(result)
