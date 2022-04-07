@@ -82,6 +82,7 @@ const getItems = (customer_bags_id) => {
     })
 }
 
+// const deleteItem = (customer_bags_id, )
 
 
 module.exports = {
