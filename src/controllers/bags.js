@@ -72,8 +72,31 @@ const getItems = async (req, res, next) => {
     }
 }
 
+const deleteItem = async (req, res, next) => {
+    try {
+        const {bag_item_id, customer_bags_id} = req.body
+        const result = await bagsQuery.deleteItem(bag_item_id, customer_bags_id)
+        commonHelper.response(res, result, 200, `Item ${bag_item_id} is deteled from customer bag : ${customer_bags_id}`)
+    } catch (error) {
+        console.log(error.message)
+        next({ status: 500, message: `${error.message}`})
+    }
+}
+
+const deleteAllItem = async (req, res, next) => {
+    try {
+        const {customer_bags_id} = req.body
+        const result = await bagsQuery.deleteAllItem(customer_bags_id)
+        commonHelper.response(res, result, 200, `All items are deteled from customer bag : ${customer_bags_id}`)
+    } catch (error) {
+        console.log(error.message)
+        next({ status: 500, message: `${error.message}`})
+    }
+}
 
 module.exports = {
     addItem,
-    getItems
+    getItems,
+    deleteItem,
+    deleteAllItem
 }

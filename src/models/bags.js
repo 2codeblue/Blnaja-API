@@ -82,8 +82,31 @@ const getItems = (customer_bags_id) => {
     })
 }
 
-// const deleteItem = (customer_bags_id, )
+const deleteItem = (id_bag_item, customer_bags_id) => {
+    return new Promise ((resolve, reject) => {
+        const sql = `DELETE FROM bag_item WHERE id = ? AND customer_bags_id = ?`
+        connection.query(sql, [id_bag_item, customer_bags_id], (error, result) => {
+            if (!error) {
+                resolve(result)
+            } else {
+                reject(error)
+            }
+        })
+    })
+}
 
+const deleteAllItem = (customer_bags_id) => {
+    return new Promise ((resolve, reject) => {
+        const sql = `DELETE FROM bag_item WHERE customer_bags_id = ?`
+        connection.query(sql, customer_bags_id, (error, result) => {
+            if (!error) {
+                resolve(result)
+            } else {
+                reject(error)
+            }
+        })
+    })
+}
 
 module.exports = {
     addItem,
@@ -91,5 +114,7 @@ module.exports = {
     findCustomerBagsId,
     findItemToUpdateQuantity,
     updateQuantityItem,
-    getItems
+    getItems,
+    deleteItem,
+    deleteAllItem
 }
