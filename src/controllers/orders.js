@@ -48,8 +48,20 @@ const getOrdersByCustomerId = async (req, res, next) => {
     }
 }
 
+const getOrderDetails = async (req, res, next) => {
+    try {
+        const order_id = req.params.id
+        const orderDetails = await ordersQuery.getOrderDetails(order_id)
+        commonHelper.response(res, orderDetails, 200, `Order ${order_id} details.`)
+    } catch (error) {
+        console.log(error)
+        next({ status: 500, message: `${error.message}`})
+    }
+}
+
 
 module.exports = {
     addOrder,
-    getOrdersByCustomerId
+    getOrdersByCustomerId,
+    getOrderDetails
 }
