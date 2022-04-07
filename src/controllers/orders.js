@@ -44,7 +44,7 @@ const getOrdersByCustomerId = async (req, res, next) => {
         const result = []
         let listOrders = await ordersQuery.getOrdersByCustomerId(customer_id)
         for (let i = 0; i < listOrders.length; i++) {
-            const [productDisplay] = await productQuery.getProductDetail(listOrders[i].product_id)
+            const [productDisplay] = await productQuery.getProductDetail(listOrders[i]['ANY_VALUE(bag_item.product_id)'])
             const order = {
                 orderDetails : listOrders[i],
                 productDisplay : {
